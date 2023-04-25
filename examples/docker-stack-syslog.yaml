@@ -1,0 +1,47 @@
+# stack definition for: syslog collection service(s)
+#
+version: '3'
+
+networks:
+  syslog-net:
+
+volumes:
+  syslog:
+
+services:
+  syslog:
+    networks:
+      syslog-net:
+        aliases:
+          - syslog
+    image: ghcr.io/systemx-io/syslog-collector:1.0.0
+    deploy:
+      replicas: 1
+    ports:
+      - "514:10514/tcp"
+      - "514:10514/udp"
+    volumes:
+      - type: volume
+        source: syslog
+        target: /app/data
+        volume:
+          nocopy: false
+          read_only: false
+
+  cron:
+    networks:
+      syslog-net:
+        aliases:
+          - cron
+    image: ghcr.io/systemx-io/syslog-retention:1.0.0
+    deploy:
+      replicas: 1
+    volumes:
+      - type: volume
+        source: syslog
+        target: /app/data
+        volume:
+          nocopy: true
+          read_only: false
+
+# EOF
