@@ -2,9 +2,8 @@
 # --
 #
 
-LABEL org.opencontainers.image.source https://github.com/systemx-io/docker-syslog-retention
-
 FROM alpine:latest
+LABEL org.opencontainers.image.source https://github.com/systemx-io/docker-syslog-retention
 
 ADD ./files/purge-syslog /etc/periodic/daily/purge-syslog
 
