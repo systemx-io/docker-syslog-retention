@@ -8,6 +8,6 @@ LABEL org.opencontainers.image.licenses=BSD-2-Clause
 
 ADD ./files/purge-syslog /etc/periodic/daily/purge-syslog
 
-CMD ["crond", "-f", "-l", "2"]
+CMD ["crond", "-f", "-d", "6"]
 
 # EOF
