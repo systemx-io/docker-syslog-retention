@@ -1,0 +1,2 @@
+# Purge syslog files older than 90 days
+01 0 * * * /usr/bin/find /app/data/syslog -type f -mtime +90 -delete
